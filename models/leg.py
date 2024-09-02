@@ -12,6 +12,13 @@ class Leg:
         # Convert position values to duty cycle or pulse width for servos
         if self.inverse:
             position = LegPosition(upper_degree=180 - position.upper_degree, lower_degree=180 - position.lower_degree)
+        if not self.inverse:
+            position = LegPosition(upper_degree=position.upper_degree - 15, lower_degree=position.lower_degree - 15)
+            if position.upper_degree < 0:
+                position = LegPosition(upper_degree=0, lower_degree=position.lower_degree)
+            if position.lower_degree < 0:
+                position = LegPosition(upper_degree=position.upper_degree, lower_degree=0)
+                
         upper_pwm_value = self.map_range(position.upper_degree, 0, 180, MIN_PWM_DUTY_CYCLE, MAX_PWM_DUTY_CYCLE)
         lower_pwm_value = self.map_range(position.lower_degree, 0, 180, MIN_PWM_DUTY_CYCLE, MAX_PWM_DUTY_CYCLE)
         self.upper_servo.duty_cycle = int(upper_pwm_value)

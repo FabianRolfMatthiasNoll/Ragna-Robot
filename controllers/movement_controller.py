@@ -18,30 +18,30 @@ class MovementController:
 
     def walk_forward(self) -> None:
         position1 = LegPosition(upper_degree=0, lower_degree=0)
-        position2 = LegPosition(upper_degree=45, lower_degree=45)
-        while True:
-            print("Walking forward")
-            with ThreadPoolExecutor() as executor:
-                futures = [
-                    executor.submit(self.move_leg, "front_right", position1),
-                    executor.submit(self.move_leg, "front_left", position1),
-                    executor.submit(self.move_leg, "back_right", position1),
-                    executor.submit(self.move_leg, "back_left", position1)
-                ]
-                for future in futures:
-                    future.result()  # Ensure all threads complete before moving on
-            sleep(2)
-            print("Walking forward 2")
-            with ThreadPoolExecutor() as executor:
-                futures = [
-                    executor.submit(self.move_leg, "front_right", position2),
-                    executor.submit(self.move_leg, "front_left", position2),
-                    executor.submit(self.move_leg, "back_right", position2),
-                    executor.submit(self.move_leg, "back_left", position2)
-                ]
-                for future in futures:
-                    future.result()  # Ensure all threads complete before moving on
-            sleep(2)
+        position2 = LegPosition(upper_degree=90, lower_degree=90)
+        # while True:
+        #     print("Walking forward")
+        #     with ThreadPoolExecutor() as executor:
+        #         futures = [
+        #             executor.submit(self.move_leg, "front_right", position1),
+        #             executor.submit(self.move_leg, "front_left", position1),
+        #             executor.submit(self.move_leg, "back_right", position1),
+        #             executor.submit(self.move_leg, "back_left", position1)
+        #         ]
+        #         for future in futures:
+        #             future.result()  # Ensure all threads complete before moving on
+        #     sleep(2)
+        #     print("Walking forward 2")
+        #     with ThreadPoolExecutor() as executor:
+        #         futures = [
+        #             executor.submit(self.move_leg, "front_right", position2),
+        #             executor.submit(self.move_leg, "front_left", position2),
+        #             executor.submit(self.move_leg, "back_right", position2),
+        #             executor.submit(self.move_leg, "back_left", position2)
+        #         ]
+        #         for future in futures:
+        #             future.result()  # Ensure all threads complete before moving on
+        #     sleep(2)
         with ThreadPoolExecutor() as executor:
                 futures = [
                     executor.submit(self.move_leg, "front_right", position2),
